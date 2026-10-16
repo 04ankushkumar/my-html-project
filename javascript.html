@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navratri Celebration</title>
+</head>
+<body>
+
+    <h2>Navratri Celebration Checker</h2>
+
+    <input type="number" id="age" placeholder="Enter your age">
+    <button onclick="checkAge()">Check</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function checkAge() {
+            let age = Number(document.getElementById("age").value);
+
+            if (age >= 11 && age <= 19) {
+                document.getElementById("result").innerText =
+                    "Yes! You can celebrate Navratri in college.";
+            } else {
+                document.getElementById("result").innerText =
+                    "No! You cannot celebrate Navratri in college.";
+            }
+        }
+    </script>
+
+</body>
+</html>
