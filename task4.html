@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse number and Digit sum</title>
+</head>
+<body>
+    <script>
+let n=12345;
+let reverse=0;
+let sum=0;
+while(n>0){
+    let digit=n%10;
+    reverse=reverse*10+digit;
+    sum=sum+digit;
+    n=Math.floor(n/10);
+}
+document.write("Reverse number="+reverse+"<br>");
+document.write("Sum of Digits="+sum);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Digits Using While Loop</title>
+</head>
+<body>
+    <script>
+        let n=9087654;
+        let total=0;
+        let even=0;
+        let odd=0;
+        while(n>0){
+            let digit=n%10;
+            total++;
+            if(digit%2==0){
+                even++;
+            }else{
+                odd++;
+            }
+            n=Math.floor(n/10);
+        }
+        document.write("Total digits:"+total+"<br>");
+        document.write("Even digits:"+even+"<br>");
+        document.write("Odd digits:"+odd);
+    </script>
+    
+</body>
+</html>

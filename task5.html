@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Even and Odd Digits</title>
+</head>
+<body>
+    <script>
+        let n=5837462;
+        let sumeven=0;
+        let sumodd=0;
+        while(n>0){
+            let digit=n%10;
+            if(digit%2==0){
+                sumeven=sumeven+digit;
+            }else{
+                sumodd=sumodd+digit;
+            }
+            n=Math.floor(n/10);
+        }
+        document.write("Sum of Even Digits:"+sumodd+"<br>");
+        document.write("sum of odd Digits:"+sumodd);
+    </script>
+</body>
+</html>
