@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>University Finder</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 40px;
+        }
+
+        input {
+            padding: 15px;
+            width: 250px;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 15px 25px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkblue;
+        }
+
+        #results {
+            margin-top: 30px;
+        }
+
+        .university {
+            background: white;
+            padding: 15px;
+            margin: 15px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .university h3 {
+            color: #333;
+        }
+
+        .university a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .university a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>University Finder</h1>
+
+    <input
+        type="text"
+        id="country"
+        placeholder="Enter Country Name"
+    >
+
+    <button onclick="searchUniversities()">
+        Search
+    </button>
+
+    <div id="results"></div>
+
+
+    <script>
+
+        async function searchUniversities() {
+
+            let country = document.getElementById("country").value.trim();
+
+            let results = document.getElementById("results");
+
+            results.innerHTML = "";
+
+            if (country === "") {
+
+                results.innerHTML = "Please enter country name";
+                return;
+
+            }
+
+            results.innerHTML = "Loading...";
+
+            try {
+
+                let apiURL =
+                    "https://proxy.cors.dev/http://universities.hipolabs.com/search?country="
+                    + encodeURIComponent(country);
+
+                let response = await fetch(apiURL, {
+                    method: "GET",
+                    credentials: "omit"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server Error: " + response.status);
+                }
+
+                let data = await response.json();
+
+                results.innerHTML = "";
+
+                if (!Array.isArray(data) || data.length === 0) {
+
+                    results.innerHTML = "No universities found";
+                    return;
+
+                }
+
+                data.forEach(function(university) {
+
+                    let card = document.createElement("div");
+                    card.className = "university";
+
+                    let heading = document.createElement("h3");
+                    heading.textContent = university.name;
+
+                    let link = document.createElement("a");
+
+                    link.textContent = "Visit Website";
+
+                    let website = university.web_pages?.[0];
+
+                    if (website) {
+                        link.href = website;
+                        link.target = "_blank";
+                        link.rel = "noopener noreferrer";
+                    } else {
+                        link.textContent = "Website not available";
+                    }
+
+                    card.appendChild(heading);
+                    card.appendChild(link);
+
+                    results.appendChild(card);
+
+                });
+
+            }
+
+            catch (error) {
+
+                results.innerHTML =
+                    "Something went wrong: " + error.message;
+
+                console.log(error);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
